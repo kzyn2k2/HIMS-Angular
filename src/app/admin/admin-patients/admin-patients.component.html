@@ -1,0 +1,54 @@
+<div class="h-screen">
+    <div class="m-8">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="ms-3">Patients</span>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+<div class="m-8 border border-slate-400 shadow-md p-5 h-5/6">
+    <div class="flex">
+        <div class="flex w-6/12">
+            <input type="text" class="border border-slate-300 p-3">
+            <button type="button" class="bg-blue-900 text-white p-3"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button routerLink="/admin/register-patient" type="button" class="bg-blue-900 text-white p-3 ms-2">
+                <i class="fa-solid fa-upload"></i>   Register</button>
+        </div>
+        <div class="flex justify-end w-6/12 pe-5">
+            <app-paginator [totalItems]="pager.totalPages" (pageChangeEvent)="changeEvent($event)"></app-paginator>
+        </div>
+    </div>
+    <div class="mt-8 pe-5">
+        <table class="w-full border border-slate-300 shadow-sm">
+            <thead>
+                <tr class="border-b border-slate-500">
+                    <th>No.</th>
+                    <th class="pt-4 pb-4 font-semibold">First Name</th>
+                    <th class="font-semibold">Last Name</th>
+                    <th class="font-semibold">Email</th>
+                    <th class="font-semibold">Phone</th>
+                    <th class="font-semibold">Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let patientSummary of patients; let i = index" [routerLink]="['/admin/patients/', patientSummary.id]" class="text-center border-b border-slate-300">
+                    <td>{{i + 1 + (pageSize * pageNumber)}}</td>
+                    <td class="pt-4 pb-4">{{patientSummary.firstName}}</td>
+                    <td>{{patientSummary.lastName}}</td>
+                    <td>{{patientSummary.email}}</td>
+                    <td>{{patientSummary.phone}}</td>
+                    <td>{{patientSummary.gender | titlecase}}</td>
+                </tr>
+               <tr *ngIf="patients.length <= 0">
+                        <td colspan="6" class="text-center py-3 font-semibold">No doctors</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

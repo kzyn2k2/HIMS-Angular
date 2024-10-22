@@ -1,0 +1,35 @@
+<div class="h-screen">
+        <div class="m-8">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span class="ms-3">Appointments</span>
+                    </a>
+                </li>
+                  <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-caret-right"></i>
+                        <span class="ms-3">Register</span> 
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+<div class="m-8 border border-slate-400 shadow-md p-5 h-5/6">
+    <div class="flex h-full">
+    <div class="w-5/12 overflow-y-auto p-2 border-gray-500">
+    <p class="text-2xl font-semibold">Departments</p>
+    
+    <div class="bg-slate-200 border border-slate-400 rounded-md shadow-md p-4 mt-5" *ngFor="let department of departments" [routerLink]="['departments/'+patientId+'/'+department.id]">
+        <p class="text-2xl font-semibold">{{department.name}}</p>
+        <p class="text-base">{{department.description}}</p> 
+    </div>
+    </div>
+    <div class="w-7/12">
+            <router-outlet></router-outlet>
+    </div>
+    </div>
+    </div>
+</div>

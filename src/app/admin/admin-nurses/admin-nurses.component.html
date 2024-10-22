@@ -1,0 +1,56 @@
+<div class="h-screen">
+    <div class="m-8">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span class="ms-3">Nurses</span>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="m-8 border border-slate-400 shadow-md p-5 h-5/6">
+  <div class="flex">
+        <div class="flex w-6/12">
+            <input type="text" class="border border-slate-300 p-3 rounded-s-lg focus:outline-none focus:shadow-none">
+            <button type="button" class="bg-blue-900 hover:bg-blue-800 text-white p-3"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button routerLink="/admin/register-nurse" type="button" class="bg-blue-900 text-white p-3 ms-2">
+                <i class="fa-solid fa-upload"></i>   Register</button>
+        </div>
+        <div class="flex justify-end w-6/12 pe-5">
+            <app-paginator [totalItems]="pager.totalItems" (pageChangeEvent)="changeEvent($event)"></app-paginator>
+        </div>
+    </div>
+    <div class="mt-8 pe-5">
+        <table class="w-full border border-slate-300 shadow-sm">
+            <thead>
+                <tr class="border-b border-slate-500">
+                    <th>No.</th>
+                    <th class="pt-4 pb-4 font-semibold">First Name</th>
+                    <th class="font-semibold">Last Name</th>
+                    <th class="font-semibold">License Number</th>
+                    <th class="font-semibold">Department</th>
+                    <th class="font-semibold">Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nurseSummary of nurses; let i = index" [routerLink]="['/admin/nurses/', nurseSummary.id]" class="text-center border-b border-slate-300">
+                    <td>{{i + 1 + (pageSize * pageNumber)}}</td>
+                    <td class="pt-4 pb-4">{{nurseSummary.firstName}}</td>
+                    <td>{{nurseSummary.lastName}}</td>
+                    <td>{{nurseSummary.licenseNumber}}</td>
+                    <td>{{nurseSummary.departmentName}}</td>
+                    <td>{{nurseSummary.rank | titlecase}}</td>
+                </tr>
+                <tr *ngIf="nurses.length <= 0">
+                        <td colspan="6" class="text-center py-3 font-semibold">No nurses</td>
+                    </tr>
+               
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,93 @@
+<div class="h-screen">
+    <div class="m-8">
+<nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x0 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="ms-2">Patient</span>
+                    </a>
+                </li>
+                <li class="inline-flex items-center">
+                    <a class="inline-flex items-center text-sm font-medium text-blue-900 hover:text-blue-700">
+                        <i class="fa-solid fa-caret-right"></i>
+                        <span class="ms-2">Register</span> 
+                    </a>
+                </li>
+            </ol>
+        </nav>
+</div>
+    <div class=" h-5/6 border border-slate-500 shadow-md p-5 m-8" >
+    <div>
+        <p class="text-2xl font-semibold">Register Patient</p>
+        <form [formGroup]="form" (ngSubmit)="registerPatient()">
+        <div class="mt-5 grid md:grid-cols-2 gap-4">
+            <div>
+                <label for="firstName" class="block mb-4 text-base font-medium">First Name</label>
+                <input type="text" id="firstName" class="block w-3/4 p-2 border border-slate-400 rounded-md"
+                formControlName="firstName">
+                <p *ngIf="form.controls['firstName'].errors?.['required'] && (form.controls['firstName'].touched || 
+            submitted)" class="text-sm text-red-600">Required field</p>
+            <p *ngIf="(form.controls['firstName'].errors?.['required'] == null) && form.controls['firstName'].errors?.['name'] && (form.controls['firstName'].touched || 
+            submitted)" class="text-sm text-red-600">Invalid name</p>
+            </div>
+            <div>
+                <label for="lastName" class="block mb-4 text-base font-medium">Last Name</label>
+                <input type="text" id="lastName" class="block w-3/4 p-2 border border-slate-400 rounded-md" 
+                formControlName="lastName">
+                <p *ngIf="form.controls['lastName'].errors?.['required'] && (form.controls['lastName'].touched || 
+            submitted)" class="text-sm text-red-600">Required field</p>
+            <p *ngIf="(form.controls['lastName'].errors?.['required'] == null) && form.controls['lastName'].errors?.['name'] && (form.controls['firstName'].touched || 
+            submitted)" class="text-sm text-red-600">Invalid name</p>
+            </div>
+           
+    
+        </div>
+        <div class="mt-6 grid md:grid-cols-2 gap-4">
+             <div>
+                <label for="dob" class="block mb-4 text-base font-medium">Date of Birth</label>
+                <input type="date" id="dob" class="block w-3/4 p-2 border border-slate-400 rounded-md"
+                formControlName="dob">
+              <p *ngIf="form.controls['dob'].errors?.['required'] && (form.controls['dob'].touched || 
+            submitted)" class="text-sm text-red-600">Required field</p>
+            </div>
+            <div>
+                <label for="gender" class="block mb-4 text-base font-medium">Gender</label>
+                <dropdown class="block w-3/4" [optionName]="'Gender'" [options]="genderDropdownOptions" (valueSelectedEvent)="genderSelected($event)"></dropdown>
+                <p *ngIf="!genderSelect && submitted" class="text-sm text-red-600"></p>
+            </div>
+        </div>
+        <div class="mt-6 grid md:grid-cols-2 gap-4">
+             <div>
+                <label for="phone" class="block mb-4 text-base font-medium">Phone</label>
+                <input type="text" id="phone" class="block w-3/4 p-2 border border-slate-400 rounded-md"
+                formControlName="phone">
+                <p *ngIf="form.controls['phone'].errors?.['required'] && (form.controls['phone'].touched || 
+                submitted)" class="text-sm text-red-600">Required field</p>
+                <p *ngIf="(form.controls['phone'].errors?.['required'] == null) && form.controls['phone'].errors?.['phone'] && (form.controls['phone'].touched || 
+                submitted)" class="text-sm text-red-600">Required field</p>
+            </div>
+            <div>
+                <label for="email" class="block mb-4 text-base font-medium">Email</label>
+                <input type="email" id="dob" class="block w-3/4 p-2 border border-slate-400 rounded-md"
+                formControlName="email">
+                <p *ngIf="(form.controls['email'].errors?.['required'] == null) && form.controls['email'].errors?.['email'] && (form.controls['email'].touched || 
+                submitted)" class="text-sm text-red-600">Invalid email</p>
+            </div>
+    
+        </div>
+        <div class="mt-6">
+            <label for="address" class="block mb-4 text-base font-medium">Address</label>
+            <textarea name="address" id="address" rows="4" class="block w-2/4 p-2 border border-slate-400 rouned-md"
+            formControlName="address"></textarea>
+        </div>
+        <div class="flex mt-6 justify-start">
+            <button type="submit" class="border border-slate-300 rounded-md w-32 bg-blue-900 text-white py-3 px-4 hover:bg-blue-800">
+                <i class="fa-solid fa-upload"></i> Register</button>
+            <button type="button" [routerLink]="['/admin/patients']" class="border border-gray-300 w-32 rounded-md shadow-sm px-4 py-3 ms-4 text-white bg-red-700 hover:bg-red-600">
+                <i class="fa-solid fa-ban" ></i> Cancel</button>
+          </div>
+    </form>
+        </div>
+    </div>
+    </div>
